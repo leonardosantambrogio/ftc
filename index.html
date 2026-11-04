@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cina in treno: 20 giorni da Pechino a Hong Kong</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --paper:#EBF1F5; --surface:#FFFFFF; --ink:#15202A; --muted:#566878; --line:#C6D3DD;
+  --bar:rgba(235,241,245,.93);
+  --sea:#D2E2EE; --land:#F8F9F5; --coast:#9DB0BF; --border:#A3B2BE; --region:#8797A5;
+  --ticket:#D3E5F3; --ticket-2:#C3DAEC; --ticket-ink:#14324F;
+  --busticket:#D6ECE3; --busticket-2:#C5E2D6;
+  --rail:#C2372B; --jade:#24745D; --flight:#6E7F8F; --hi:#FFF1BF;
+  --sans:"Archivo","Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#0E151C; --surface:#16202A; --ink:#E2E9EF; --muted:#93A4B3; --line:#293846;
+    --bar:rgba(14,21,28,.93);
+    --sea:#0C1720; --land:#1B2733; --coast:#3E5265; --border:#4C6073; --region:#6F8395;
+    --ticket:#1A3046; --ticket-2:#203A55; --ticket-ink:#D2E4F4;
+    --busticket:#173A30; --busticket-2:#1C473A;
+    --rail:#EF6556; --jade:#5DC4A1; --flight:#8C9DAD; --hi:#3B3519;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#0E151C; --surface:#16202A; --ink:#E2E9EF; --muted:#93A4B3; --line:#293846;
+  --bar:rgba(14,21,28,.93);
+  --sea:#0C1720; --land:#1B2733; --coast:#3E5265; --border:#4C6073; --region:#6F8395;
+  --ticket:#1A3046; --ticket-2:#203A55; --ticket-ink:#D2E4F4;
+  --busticket:#173A30; --busticket-2:#1C473A;
+  --rail:#EF6556; --jade:#5DC4A1; --flight:#8C9DAD; --hi:#3B3519;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bar);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+a{color:inherit}
+:focus-visible{outline:2.5px solid var(--rail);outline-offset:2px;border-radius:4px}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bar);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:48rem;margin:0 auto;display:flex;align-items:center;gap:.75rem;padding:.55rem 1rem}
+.brand{font-weight:800;font-stretch:72%;font-size:1.15rem;white-space:nowrap;letter-spacing:.005em}
+.brand span{color:var(--rail)}
+.nav{display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.nav::-webkit-scrollbar{display:none}
+.nav a{text-decoration:none;font-size:.9rem;padding:.35rem .6rem;border-radius:999px;color:var(--muted);white-space:nowrap}
+.nav a:hover{color:var(--ink);background:var(--surface)}
+
+main{max-width:48rem;margin:0 auto;padding:0 1rem 3rem}
+section{padding-top:2.6rem}
+h1{font-weight:850;font-stretch:68%;font-size:clamp(2.7rem,11vw,4.6rem);line-height:.92;margin:1.6rem 0 .9rem;letter-spacing:-.01em}
+h2{font-weight:800;font-stretch:72%;font-size:clamp(1.9rem,7vw,2.5rem);line-height:1;margin:0 0 .6rem}
+h3{font-weight:750;font-stretch:80%;font-size:1.35rem;line-height:1.15;margin:0}
+.lede{font-size:1.1rem;max-width:38rem;margin:0 0 1rem}
+.intro p{max-width:38rem}
+.callout{border-left:3px solid var(--rail);padding:.15rem 0 .15rem .9rem;color:var(--muted);font-size:.97rem;max-width:38rem}
+.sub{color:var(--muted);max-width:38rem;margin:0 0 1.2rem}
+
+/* map */
+.mapwrap{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.seg{display:flex;gap:4px;padding:6px;border-bottom:1px solid var(--line)}
+.seg button{flex:1;font:inherit;font-size:.92rem;font-weight:600;border:0;border-radius:8px;padding:.5rem .6rem;background:transparent;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--paper);color:var(--ink)}
+svg.map{display:block;width:100%;height:auto;max-height:78vh;--k:1;touch-action:manipulation}
+#mapAll{background:var(--sea)}
+#mapYun{background:var(--land)}
+svg.map[hidden]{display:none}
+svg.map .sea{fill:var(--sea)}
+svg.map .land{fill:var(--land);stroke:var(--coast);stroke-width:calc(var(--k)*1px);stroke-linejoin:round}
+svg.map .border{fill:none;stroke:var(--border);stroke-width:calc(var(--k)*1px);stroke-dasharray:4 4}
+svg.map .region{fill:var(--region);font-size:calc(var(--k)*11px);font-family:var(--sans);letter-spacing:.02em}
+svg.map .leg{fill:none;stroke-linecap:round}
+svg.map .leg.t{stroke:var(--rail);stroke-width:calc(var(--k)*3px)}
+svg.map .leg.b{stroke:var(--jade);stroke-width:calc(var(--k)*2.6px)}
+svg.map .leg.f{stroke:var(--flight);stroke-width:calc(var(--k)*1.6px)}
+svg.map .draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .5s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion: reduce){svg.map .draw{animation:none;stroke-dashoffset:0}}
+svg.map .stop{cursor:pointer}
+svg.map .stop .dot{fill:var(--surface);stroke:var(--ink);stroke-width:calc(var(--k)*2px)}
+svg.map .stop.transit .dot{fill:var(--ink);stroke:none}
+svg.map .stop.sel .dot{fill:var(--rail);stroke:var(--surface)}
+svg.map .stop .hit{fill:transparent}
+svg.map .cdot{fill:var(--ink)}
+svg.map .lab{fill:var(--ink);font-size:calc(var(--k)*13px);font-weight:650;font-family:var(--sans);paint-order:stroke;stroke:var(--land);stroke-width:calc(var(--k)*3.5px);stroke-linejoin:round}
+svg.map .lab.m{fill:var(--muted);font-weight:500;font-size:calc(var(--k)*12px)}
+svg.map .lab.sea-l{stroke:var(--sea)}
+svg.map .stop.sel .lab{fill:var(--rail)}
+svg.map .ylbox{fill:none;stroke:var(--ink);stroke-width:calc(var(--k)*1.4px);stroke-dasharray:3 3;cursor:pointer}
+svg.map .zoombg{fill:var(--land)}
+svg.map .scale{stroke:var(--ink);stroke-width:calc(var(--k)*2px)}
+svg.map .note{fill:var(--muted);font-size:calc(var(--k)*11.5px);font-family:var(--sans);paint-order:stroke;stroke:var(--sea);stroke-width:calc(var(--k)*3px)}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;padding:.7rem 1rem;border-top:1px solid var(--line);font-size:.88rem;color:var(--muted)}
+.legend i{display:inline-block;width:22px;height:0;vertical-align:middle;margin-right:.35rem;border-top:3px solid var(--rail)}
+.legend i.b{border-top:3px dashed var(--jade)}
+.legend i.f{border-top:2px dotted var(--flight)}
+.panel{padding:1rem 1rem 1.1rem;border-top:1px solid var(--line)}
+.panel .pt{display:flex;align-items:baseline;gap:.55rem;flex-wrap:wrap}
+.panel .zh{font-size:1.25rem;color:var(--muted);font-weight:500}
+.panel .meta{color:var(--muted);font-size:.93rem;margin:.2rem 0 .45rem}
+.panel p{margin:0 0 .7rem}
+.btn{font:inherit;font-size:.93rem;font-weight:650;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:.45rem .9rem;cursor:pointer;text-decoration:none;display:inline-block}
+.btn:hover{border-color:var(--ink)}
+
+/* itinerary */
+.group{margin-top:1.6rem}
+.ghead{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;padding-bottom:.45rem;border-bottom:2px solid var(--ink)}
+.ghead .zh{color:var(--muted);font-size:1.05rem}
+.ghead .temp{margin-left:auto;color:var(--muted);font-size:.88rem;white-space:nowrap}
+.day{display:grid;grid-template-columns:3.1rem 1fr;gap:.2rem .9rem;padding:.9rem 0;border-bottom:1px solid var(--line);scroll-margin-top:calc(env(safe-area-inset-top,0px) + 70px)}
+.day.flash{animation:flash 1.6s ease-out}
+@keyframes flash{0%,40%{background:var(--hi)}100%{background:transparent}}
+.dn{font-weight:850;font-stretch:70%;font-size:2.1rem;line-height:.9;text-align:right;font-variant-numeric:tabular-nums}
+.dn small{display:block;font-size:.78rem;font-weight:500;font-stretch:100%;color:var(--muted);margin-top:.3rem;line-height:1.1}
+.day h4{margin:0 0 .25rem;font-size:1.06rem;font-weight:700;line-height:1.25}
+.day p{margin:0;color:var(--ink)}
+.move{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:600;color:var(--rail);margin:0 0 .35rem}
+.move svg{width:16px;height:16px;flex:none}
+.move.bus{color:var(--jade)}
+.move.fly{color:var(--flight)}
+.day.long{background:linear-gradient(90deg,transparent 0,transparent 3.1rem,color-mix(in srgb,var(--rail) 7%,transparent) 3.1rem)}
+.day.long .dn{color:var(--rail)}
+
+/* tickets */
+.tsum{display:flex;flex-wrap:wrap;gap:.3rem 1.4rem;margin:0 0 1.1rem;font-size:.97rem}
+.tsum b{font-weight:750}
+.tickets{display:grid;gap:.75rem}
+@media (min-width:44rem){.tickets{grid-template-columns:1fr 1fr}}
+.ticket{position:relative;color:var(--ticket-ink);background:
+  repeating-linear-gradient(135deg,transparent 0 9px,color-mix(in srgb,var(--ticket-2) 70%,transparent) 9px 10px),var(--ticket);
+  border-radius:10px;padding:.7rem 1.1rem .75rem 1.25rem}
+.ticket.bus{background:repeating-linear-gradient(135deg,transparent 0 9px,color-mix(in srgb,var(--busticket-2) 70%,transparent) 9px 10px),var(--busticket)}
+.ticket::before,.ticket::after{content:"";position:absolute;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;background:var(--paper)}
+.ticket::before{left:-7px}.ticket::after{right:-7px}
+.trow{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;font-size:.85rem}
+.serial{color:var(--rail);font-weight:800;font-stretch:75%;font-size:1.05rem;letter-spacing:.03em}
+.ticket.bus .serial{color:var(--jade)}
+.route{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:.5rem;margin:.35rem 0 .45rem}
+.st b{display:block;font-size:1.45rem;font-weight:700;line-height:1.1;letter-spacing:.04em}
+.st span{display:block;font-size:.84rem;opacity:.85;line-height:1.25;margin-top:.1rem}
+.st.to{text-align:right}
+.arrow{align-self:center;width:42px;height:12px}
+.arrow line,.arrow path{stroke:currentColor;stroke-width:1.6;fill:none}
+.tfoot{display:flex;flex-wrap:wrap;gap:.2rem 1rem;font-size:.9rem;font-weight:650;border-top:1px dashed color-mix(in srgb,var(--ticket-ink) 35%,transparent);padding-top:.4rem}
+.tnote{font-size:.85rem;margin:.35rem 0 0;opacity:.9}
+
+/* costs */
+.toggle{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px;margin:0 0 1rem}
+.toggle button{font:inherit;font-size:.93rem;font-weight:650;border:0;background:transparent;color:var(--muted);padding:.42rem 1rem;border-radius:999px;cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.costs{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:.3rem 1rem .9rem}
+.crow{padding:.75rem 0;border-bottom:1px solid var(--line)}
+.crow .top{display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.crow .lbl{font-weight:650}
+.crow .val{font-weight:750;font-variant-numeric:tabular-nums;white-space:nowrap}
+.crow .det{color:var(--muted);font-size:.9rem;margin:.1rem 0 .4rem}
+.bar-c{height:6px;border-radius:3px;background:var(--paper);overflow:hidden}
+.bar-c i{display:block;height:100%;background:var(--ink);border-radius:3px;transition:width .35s ease}
+.total{display:flex;justify-content:space-between;align-items:baseline;padding-top:.9rem;gap:1rem}
+.total .big{font-weight:850;font-stretch:72%;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.perday{color:var(--muted);font-size:.93rem;margin:.35rem 0 0}
+
+/* docs */
+.prog{font-size:.95rem;color:var(--muted);margin:0 0 .7rem}
+.prog b{color:var(--ink)}
+.checks{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.checks li{border-bottom:1px solid var(--line)}
+.checks li:last-child{border-bottom:0}
+.checks label{display:grid;grid-template-columns:1.6rem 1fr;gap:.75rem;padding:.85rem 1rem;cursor:pointer}
+.checks input{appearance:none;-webkit-appearance:none;width:1.4rem;height:1.4rem;border:2px solid var(--muted);border-radius:6px;margin:.1rem 0 0;display:grid;place-content:center;background:var(--surface);cursor:pointer}
+.checks input::after{content:"";width:.7rem;height:.38rem;border-left:2.5px solid var(--paper);border-bottom:2.5px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px);opacity:0}
+.checks input:checked{background:var(--jade);border-color:var(--jade)}
+.checks input:checked::after{opacity:1}
+.checks .ct{font-weight:700;display:block;line-height:1.3}
+.checks .cd{display:block;color:var(--muted);font-size:.92rem;margin-top:.15rem}
+.checks input:checked + span .ct{text-decoration:line-through;text-decoration-color:var(--muted)}
+.agroup h3{margin:1.4rem 0 .55rem}
+
+.notes p{max-width:38rem}
+.notes h3{margin:1.4rem 0 .3rem}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="bar-in">
+    <div class="brand">Cina <span>in treno</span></div>
+    <nav class="nav" aria-label="Sezioni">
+      <a href="#mappa">Mappa</a><a href="#tappe">Tappe</a><a href="#tratte">Tratte</a><a href="#costi">Costi</a><a href="#documenti">Documenti</a><a href="#app">App</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="intro" style="padding-top:.4rem">
+    <h1>Da Pechino a Hong Kong, sui binari</h1>
+    <p class="lede">Venti giorni da solo con lo zaino, dal 1° al 20 marzo 2027. Si vola solo all’andata e al ritorno: in mezzo ci sono 14 tratte via terra, 12 in treno e 2 in bus, per circa 38 ore di viaggio.</p>
+    <p class="callout">Il giro evita i grandi classici e passa da Shanxi, Yunnan e Guizhou, dove a marzo i turisti stranieri sono pochissimi. Le date sono indicative: il Capodanno cinese 2027 cade il 6 febbraio e l’esodo che lo accompagna dura fino a inizio marzo.</p>
+  </section>
+
+  <section id="mappa">
+    <h2>Il percorso</h2>
+    <p class="sub">Tocca una tappa per vederne giorni, clima e cosa fare.</p>
+    <div class="mapwrap">
+      <div class="seg" role="group" aria-label="Vista della mappa">
+        <button type="button" id="vAll" aria-pressed="true">Percorso intero</button>
+        <button type="button" id="vYun" aria-pressed="false">Zoom sullo Yunnan</button>
+      </div>
+      <svg class="map" id="mapAll" viewBox="0 0 1000 1060" role="group" aria-label="Mappa del percorso da Pechino a Hong Kong">
+        <rect class="sea" width="1000" height="1060"/>
+        <path class="land" d="M1005,132.4L1003.3,135.1L1000.3,141.1L998.0,144.2L996.0,146.5L994.0,147.6L992.1,149.8L990.0,150.3L987.7,149.7L985.3,150.3L984.1,152.9L985.8,155.7L985.3,157.1L980.7,159.3L973.7,161.3L971.0,163.7L970.1,165.0L968.6,165.7L966.6,162.1L965.4,157.0L968.2,155.4L970.7,154.4L984.7,145.3L982.2,140.3L983.2,137.8L986.0,133.6L988.0,131.4L986.6,130.9L977.1,133.5L971.4,134.2L968.6,134.1L969.0,130.8L968.1,127.7L967.3,126.6L971.7,122.3L973.9,121.1L975.6,120.9L975.1,118.7L973.3,115.6L974.3,111.1L983.7,104.8L985.5,99.9L988.8,95.1L994.7,83.6L995.0,81.7L996.3,76.5L996.4,74.5L992.7,72.0L990.8,68.2L979.9,62.3L978.2,56.1L977.3,56.5L976.4,61.1L975.3,62.7L970.8,63.4L968.3,62.1L955.6,62.7L952.8,65.9L950.4,70.6L948.0,74.1L945.3,76.1L943.3,79.3L935.1,97.6L931.3,99.4L914.2,111.8L905.4,116.9L899.0,124.9L897.1,129.5L895.4,134.6L895.0,142.0L889.3,151.5L887.2,153.7L885.0,154.7L882.0,154.8L879.3,155.6L874.7,155.3L869.4,158.7L863.4,161.7L857.4,156.2L853.3,155.0L847.3,157.4L844.6,160.4L839.8,174.4L838.3,182.3L838.7,185.5L843.1,194.7L847.7,199.7L857.4,204.9L877.1,207.2L881.4,205.2L886.3,204.7L891.8,208.1L895.7,214.4L896.6,218.9L896.7,220.5L898.1,221.7L899.0,223.8L897.2,226.0L895.7,227.1L895.2,234.2L896.0,242.0L897.9,244.4L902.5,247.6L909.4,249.8L915.4,249.8L926.7,247.1L930.8,241.9L930.3,239.9L930.1,237.2L939.3,229.2L944.3,222.4L943.1,220.9L942.0,220.0L942.9,219.2L945.9,218.4L959.1,210.4L970.6,214.1L977.6,219.2L983.9,219.5L988.7,221.9L993.9,223.9L1000.4,223.2L1005,223.0L1005,248.6L1005,248.6L999.0,253.4L990.2,259.3L980.7,264.4L977.6,267.1L975.3,268.1L971.1,266.8L968.6,267.3L968.2,268.5L971.8,271.4L972.9,273.9L972.8,275.8L971.2,277.0L968.3,275.8L966.2,278.2L965.5,281.8L966.5,290.0L965.2,292.0L960.9,293.5L956.5,296.8L954.6,295.7L953.7,294.4L953.8,290.5L953.0,288.8L950.9,289.1L947.7,290.6L945.6,293.5L944.9,295.1L948.7,299.5L951.9,299.6L952.8,300.6L950.6,303.3L944.9,307.5L944.2,310.6L942.8,313.6L940.5,316.2L939.0,318.7L937.1,320.2L933.9,322.0L930.3,328.1L927.8,333.8L924.5,336.9L922.6,346.2L918.0,351.6L916.9,359.6L918.8,364.3L924.4,363.6L927.5,365.0L934.2,370.6L941.8,373.8L949.4,375.3L959.2,380.1L962.1,382.1L964.7,386.9L970.5,400.8L974.2,407.6L974.9,411.4L980.1,417.9L986.2,429.4L992.7,439.2L994.8,447.2L993.5,451.3L994.3,456.1L1000.0,460.0L1005,461.4L1005,493.2L1005,493.2L1003.7,493.2L995.5,486.4L990.2,484.7L984.5,484.2L972.2,492.5L968.7,492.4L967.8,493.2L966.4,494.6L972.8,495.2L978.6,492.4L984.2,488.4L992.9,489.1L994.6,491.8L996.7,496.5L1003.0,499.0L1005,499.4L1005,565.7L1005,565.7L998.9,565.1L991.8,566.2L984.3,572.1L982.5,574.3L983.8,573.9L985.0,573.0L988.7,573.3L994.1,570.0L1000.6,577.4L1005,576.3L1005,721.9L1005,721.9L1003.9,722.8L999.3,733.5L998.2,738.6L998.4,743.9L996.7,745.8L993.9,748.5L990.2,747.7L989.6,744.3L988.1,744.2L986.9,742.1L986.3,739.2L986.5,736.9L985.0,737.7L984.4,740.5L982.3,743.0L979.8,742.4L976.9,740.9L977.3,743.5L979.0,745.9L979.9,748.4L983.5,748.5L986.5,751.2L988.9,755.5L989.4,757.2L991.2,759.1L991.5,760.8L988.3,762.8L984.2,766.3L979.5,772.0L975.5,776.0L971.6,776.4L969.3,776.3L965.6,774.7L961.5,774.3L967.6,780.7L970.6,781.6L974.2,780.9L977.4,777.9L982.5,777.6L984.1,781.4L983.3,786.1L981.2,792.3L981.4,797.4L985.5,804.2L985.9,806.4L984.7,807.6L980.5,806.2L977.0,804.2L973.7,805.1L970.3,804.5L966.9,805.7L965.5,807.6L966.9,810.3L970.2,812.2L972.4,815.5L970.4,817.0L961.5,817.2L959.4,818.0L957.2,822.2L959.5,827.8L957.9,831.5L954.3,832.8L949.7,836.2L946.8,837.1L947.1,838.3L949.4,839.4L950.8,841.0L948.7,847.2L944.9,849.5L938.3,849.2L933.5,851.1L928.9,849.0L924.3,849.3L921.5,852.8L921.6,856.5L918.5,857.2L916.8,857.1L914.5,857.6L915.0,859.5L916.4,861.1L922.8,861.3L924.2,863.6L924.9,867.4L918.8,874.6L916.5,879.3L912.3,879.6L909.5,883.4L908.3,888.4L906.0,887.7L901.2,888.9L899.9,891.3L901.2,892.1L901.5,893.8L900.0,899.4L898.0,901.1L896.8,899.0L895.9,895.6L894.2,895.5L891.7,898.9L888.4,901.5L885.7,902.7L883.3,900.8L877.9,900.2L876.7,909.5L872.5,913.1L870.5,914.3L866.9,915.0L869.4,916.0L870.4,918.3L869.2,920.7L865.6,921.5L863.7,923.5L863.6,931.7L861.7,934.7L856.2,935.3L851.9,933.8L850.8,935.4L850.3,936.8L848.2,938.5L844.1,939.2L835.1,943.6L831.0,942.9L825.8,941.9L822.3,943.5L821.4,946.4L820.0,948.6L814.9,949.0L810.7,946.7L806.4,945.0L802.0,947.0L798.7,950.6L794.6,952.0L793.9,954.2L792.1,955.4L787.5,955.3L785.4,950.1L782.8,949.6L780.5,952.3L779.7,954.5L778.5,956.1L779.2,960.4L776.7,960.7L773.2,958.3L769.6,958.0L766.6,960.6L767.8,962.5L767.6,964.5L769.4,965.4L770.0,967.2L768.2,968.4L768.1,970.7L767.3,972.1L761.4,970.0L756.8,969.0L752.5,969.7L751.0,968.4L750.6,966.9L755.3,964.0L755.6,962.7L751.9,962.0L747.1,958.7L743.6,952.9L739.3,950.0L737.3,947.3L736.4,942.2L735.4,939.9L735.6,937.2L736.6,934.8L732.2,936.3L729.2,938.6L730.0,941.4L729.4,944.0L724.5,945.6L724.9,946.7L725.3,947.8L729.3,951.1L730.2,954.0L731.9,955.6L735.1,960.0L735.5,968.9L737.3,971.3L736.8,973.8L735.8,977.4L733.7,978.5L730.2,979.8L728.0,980.6L726.3,981.6L723.7,984.3L718.5,985.2L715.6,979.2L712.2,983.5L711.7,992.0L710.3,993.5L708.1,994.8L703.8,992.0L700.3,994.2L697.5,996.4L696.3,998.2L694.3,1000.4L690.3,998.6L686.8,995.8L687.5,993.6L687.1,992.2L685.5,991.2L683.9,991.4L684.8,994.2L685.7,999.6L684.1,1001.2L682.0,1002.5L677.0,1001.8L673.5,999.9L669.3,998.3L665.8,998.2L665.1,1001.6L662.9,1004.5L660.8,1004.9L658.5,1004.5L655.8,1007.6L654.6,1009.9L651.1,1012.4L641.9,1013.7L638.6,1016.2L634.3,1015.9L630.9,1016.6L628.9,1016.5L627.2,1015.3L625.1,1015.4L624.4,1019.2L619.2,1021.0L614.4,1021.6L609.3,1026.7L605.5,1029.8L602.8,1030.2L600.6,1029.2L599.4,1024.7L598.4,1024.2L597.9,1028.5L597.0,1032.0L595.1,1034.0L589.1,1038.5L587.4,1042.9L588.7,1046.8L596.9,1047.6L598.1,1049.8L597.3,1051.6L595.3,1053.2L594.8,1055.5L603.9,1062.4L604.2,1065L578.5,1065L578.5,1065L578.5,1064.9L574.6,1063.2L571.5,1058.2L572.0,1054.1L570.2,1050.8L568.4,1048.1L566.4,1046.5L565.4,1044.5L567.2,1038.2L566.0,1034.5L569.5,1029.9L570.4,1024.8L576.6,1022.9L577.0,1018.0L572.3,1018.0L569.2,1014.4L568.5,1015.9L566.1,1016.1L561.8,1009.4L560.5,1008.5L558.6,1008.4L559.7,1015.7L554.9,1018.4L550.9,1019.7L545.3,1020.2L542.1,1021.1L539.2,1020.5L539.8,1018.3L541.4,1015.6L539.9,1013.4L536.7,1011.8L531.9,1011.9L528.6,1011.5L525.4,1011.7L524.1,1010.7L521.0,1007.3L518.3,1005.2L517.2,1003.1L518.3,1000.6L517.3,999.1L512.2,999.0L512.4,1002.5L512.9,1006.7L514.3,1009.9L513.4,1011.7L510.8,1012.9L508.1,1009.5L506.8,1008.7L505.4,1008.8L504.4,1012.2L502.0,1015.2L497.6,1014.9L494.0,1016.7L489.9,1017.6L487.8,1018.0L482.5,1018.0L478.0,1022.3L474.8,1024.1L470.0,1025.5L464.7,1028.0L463.2,1032.2L463.0,1035.2L462.2,1038.6L453.6,1043.5L451.2,1043.0L449.6,1041.1L447.2,1041.5L445.4,1042.4L443.5,1042.3L441.2,1043.3L438.3,1043.0L435.6,1041.4L434.0,1041.0L432.1,1040.9L431.7,1042.7L434.4,1050.0L435.2,1053.3L426.0,1062.9L426.3,1065L-5,1065L-5,-5L1005,-5ZM765.9,976.2L764.9,977.0L761.6,973.8L761.4,972.6L763.8,972.3L766.4,973.7L766.5,975.1ZM938.5,852.9L940.7,855.8L940.1,857.9L934.2,857.4L933.7,855.6L935.9,855.7ZM929.1,855.1L927.8,858.1L925.3,857.9L925.1,855.9L924.4,855.3L925.0,853.4L925.4,852.8L928.4,854.1ZM994.0,802.3L991.0,804.9L988.9,804.1L988.6,801.1L989.3,798.4L987.9,796.7L988.7,794.2L991.1,793.3L992.0,794.6L993.4,795.3L994.0,795.9L994.2,797.4L993.1,800.0L994.3,801.2ZM597.6,1035.7L599.2,1037.3L603.7,1036.0L604.6,1038.0L604.4,1039.0L603.0,1041.4L599.3,1039.7L595.6,1040.2L593.0,1040.1L592.2,1039.0L594.2,1036.7ZM473.3,1031.2L466.9,1037.0L464.5,1036.9L466.6,1030.2L467.7,1028.7L471.6,1031.0ZM469.6,1044.7L467.1,1045.9L464.1,1045.7L467.6,1043.5L469.6,1040.6L471.0,1039.7L470.9,1042.1ZM447.6,1052.9L445.8,1053.1L442.3,1049.3L444.1,1047.2L448.3,1048.7L449.1,1049.6L449.1,1050.5L448.1,1052.2ZM440.2,1049.6L439.7,1050.5L437.5,1048.3L435.9,1047.3L437.2,1044.3L439.7,1047.6ZM734.6,950.1L735.2,952.3L731.5,949.1L730.6,949.0L728.8,947.9L727.7,945.9L730.4,945.7L733.0,948.0ZM703.8,1008.1L702.9,1009.1L701.5,1007.5L701.1,1005.1L700.1,1003.9L702.2,1002.0L703.1,1000.2L705.5,1000.4L706.7,1000.9L704.5,1002.9L704.1,1003.7ZM697.2,1006.7L692.9,1007.8L691.9,1007.7L693.4,1005.2L697.2,1003.3ZM755.6,976.8L750.4,977.1L749.3,976.8L748.6,975.8L750.4,973.9L757.3,971.0L755.8,973.7Z"/>
+        <path class="border" d="M328.4,1065L327.7,1064.4L329.6,1062.4L332.9,1060.5L335.3,1059.4L337.3,1057.4L337.7,1055.2L335.4,1053.2L332.4,1051.0L327.5,1046.7L320.8,1042.1L316.6,1040.5L314.5,1040.6L306.7,1044.0L302.5,1046.2L299.0,1050.5L295.4,1051.2L291.8,1049.2L287.8,1047.0L276.7,1043.6L271.9,1041.1L262.9,1026.1L261.6,1023.0L262.7,1019.7L263.6,1015.0L264.7,1012.0L266.6,1009.0L267.2,1006.5L266.9,1003.9L265.5,1002.3L263.8,1001.8L262.4,1001.1L261.3,997.7L260.4,998.1L259.1,1002.2L257.6,1003.5L255.6,1004.2L254.1,1003.4L253.4,1001.8L253.0,998.9L252.3,995.1L251.1,992.6L247.1,989.9L245.4,986.5L239.4,979.1L234.5,973.9L232.4,969.3L234.5,967.7L237.4,965.5L240.6,961.9L244.0,957.3L245.4,954.6L246.4,953.4L248.4,952.7L250.4,953.3L253.9,955.4L259.2,958.1L263.8,961.2L265.5,964.2L268.1,967.1L270.1,968.0L271.2,967.9L274.3,965.9L277.1,964.0L277.4,961.6L279.8,959.6L283.2,956.2L284.9,953.9L286.0,953.7L287.2,954.5L291.9,962.0L292.9,962.6L294.3,961.5L296.6,955.9L298.9,953.7L299.6,954.3L311.3,965.7L312.5,965.6L313.8,965.2L314.8,963.6L315.9,959.9L317.8,955.9L321.9,953.8L324.9,953.4L325.9,955.4L328.5,958.1L331.6,958.7L338.6,954.2L341.0,953.5L343.4,953.7L345.7,953.6L348.2,951.9L350.6,949.6L351.5,944.9L352.3,940.7L353.9,939.1L356.0,938.0L359.8,936.6L368.3,932.7L370.5,930.8L372.1,929.8L375.4,931.6L379.2,935.1L381.5,937.7L383.0,940.5L383.7,942.9L390.0,945.0L393.9,948.0L396.5,950.2L399.2,950.2L401.7,949.7L403.5,947.9L406.5,948.0L410.0,948.3L411.5,949.0L414.3,953.1L415.5,953.7L418.2,953.4L423.1,952.1L427.1,951.4L430.7,953.1L437.4,957.7L435.5,960.8L434.0,964.2L431.0,966.6L428.6,967.2L427.3,970.6L426.6,975.5L427.2,978.1L428.9,978.9L430.8,980.6L431.6,982.8L431.8,987.7L431.6,993.3L431.9,995.1L433.3,994.8L434.8,994.1L437.6,995.1L441.3,996.6L443.5,998.1L445.4,997.8L447.0,999.3L447.6,1002.1L449.5,1004.0L454.6,1007.7L458.7,1007.9L462.2,1012.8L465.9,1011.2L467.5,1013.3L475.0,1012.6L480.3,1010.6L482.2,1011.1L487.0,1015.1L489.9,1017.6M107.3,1065L107.5,1064.8L108.4,1063.1L108.1,1059.7L106.7,1055.3L107.2,1054.9L110.3,1056.0L115.1,1057.5L118.7,1057.5L121.1,1057.0L123.6,1055.2L126.8,1053.6L129.5,1054.2L131.6,1056.1L136.7,1059.4L136.2,1062.1L137.3,1062.7L138.8,1061.6L141.2,1058.7L143.4,1057.1L145.7,1056.8L148.1,1059.2L150.4,1064.0L151.2,1065M579.1,-5L577.7,-3.2L575.8,-0.7L574.7,0.6L573.8,2.6L570.0,4.1L566.8,5.8L562.1,8.2L555.3,11.0L549.8,13.5L546.2,15.7L541.0,18.3L537.4,19.2L530.3,19.2L521.3,19.9L514.8,20.5L510.0,19.9L502.6,19.6L497.0,19.1L493.2,20.1L484.3,21.1L482.3,21.3L466.5,23.7L459.5,25.0L453.0,25.5L448.4,26.4L445.6,27.6L441.7,29.2L439.6,30.0L432.5,33.2L416.7,39.9L406.1,45.4L404.4,46.3L397.2,50.1L393.1,51.6L390.1,55.1L387.8,57.2L385.3,58.2L381.1,55.7L378.1,55.8L368.4,54.5L368.8,44.2L362.1,45.4L351.2,47.4L341.2,49.1L332.2,43.7L325.4,39.5L319.5,35.9L310.3,33.3L302.3,31.0L288.0,27.1L281.8,24.0L278.8,20.0L273.5,11.5L271.8,9.7L269.1,8.4L266.2,7.6L259.9,7.2L252.3,6.0L241.5,3.5L232.8,1.5L218.1,-2.1L214.5,-2.7L206.7,-1.1L196.4,1.0L178.6,-2.8L170.8,-4.6L169.2,-5M136.7,1059.4L137.3,1056.8L140.5,1046.9L143.9,1040.6L147.6,1037.8L151.3,1036.8L155.1,1037.6L158.3,1037.2L161.0,1035.9L160.9,1034.9L157.9,1034.4L156.7,1032.6L157.6,1029.4L159.1,1027.4L161.2,1026.5L163.5,1023.4L165.9,1017.9L168.5,1015.2L171.4,1015.3L176.3,1013.2L183.4,1008.9L186.3,1004.5L188.7,1006.8L187.4,1012.0L188.7,1013.3L189.2,1015.2L188.7,1018.2L189.0,1020.8L190.1,1022.1L191.5,1022.8L198.8,1021.1L203.1,1021.2L205.0,1022.7L206.5,1023.7L208.6,1024.6L210.3,1025.6L211.3,1025.4L213.8,1023.3L214.6,1022.9L214.8,1021.9L213.2,1019.7L211.6,1017.9L211.8,1014.2L213.0,1007.8L213.4,1004.5L213.7,996.3L213.5,994.1L212.1,991.3L208.1,986.1L207.2,983.0L206.6,979.8L206.9,977.9L205.9,975.6L205.4,973.5L207.5,972.6L209.9,970.3L211.2,966.8L212.5,964.1L214.2,963.1L215.6,962.8L216.5,963.1L219.9,968.1L224.5,965.9L227.9,966.2L230.9,967.6L232.4,969.3M-5,616.2L-1.9,615.1L4.4,613.2L6.0,614.5L7.8,616.8L9.9,622.2L11.3,623.7L15.6,623.4L16.3,624.1L15.4,625.8L12.3,627.8L8.4,629.5L5.9,630.9L5.9,636.6L5.6,638.5L6.5,639.2L14.6,634.6L18.4,633.9L19.6,635.3L19.6,638.4L21.9,644.8L22.8,648.1L14.4,654.7L11.2,658.3L11.2,659.6L10.9,660.9L8.6,662.6L8.6,663.4L10.1,664.8L11.9,665.9L12.8,666.0L14.6,664.3L22.0,662.6L24.0,663.3L28.6,667.8L30.9,668.3L36.9,670.1L41.0,669.1L43.7,670.7L49.1,676.3L50.3,677.3L49.6,680.2L48.9,683.5L50.1,686.3L50.0,688.6L49.5,690.6L48.2,692.0L44.7,692.4L41.7,694.6L36.7,697.8L32.8,700.3L30.0,702.7L28.7,705.2L28.6,708.7L29.0,712.3L35.9,726.2L35.7,728.5L32.9,728.9L29.6,727.0L26.7,724.6L24.0,718.6L21.4,716.6L18.7,716.0L2.1,717.0L-1.3,717.4L-5,718.3M186.3,1004.5L186.8,1003.9L186.2,998.0L186.5,996.6L186.0,996.1L184.3,995.5L181.5,996.2L173.1,999.4L165.6,1006.0L162.3,1007.3L159.1,1007.7L155.3,1006.2L151.1,1005.1L145.0,1006.4L142.1,1005.3L140.7,1003.8L139.8,1001.5L140.6,998.8L140.5,996.8L138.0,995.5L135.4,994.4L134.0,991.7L133.4,988.7L134.4,984.9L135.2,980.9L133.9,978.9L129.8,977.6L119.8,974.9L110.9,973.2L107.0,973.4L104.1,972.6L102.4,971.7L101.5,970.4L101.7,968.6L103.5,964.5L105.6,960.5L110.2,954.9L110.9,950.8L111.0,946.0L113.6,939.8L117.6,935.3L119.4,933.9L119.1,931.8L117.9,929.7L115.9,928.5L112.8,926.9L107.5,926.1L100.5,924.2L92.3,920.6L93.7,915.2L94.0,911.8L93.2,909.0L91.7,906.9L90.9,905.0L92.9,900.2L91.3,894.8L89.4,892.4L87.3,889.5L87.2,886.4L88.6,883.7L94.9,878.3L95.0,876.9L93.6,876.9L92.0,876.9L84.1,878.3L83.3,876.9L80.6,875.8L74.8,875.1L68.1,874.9L59.5,876.2L51.4,879.1L47.7,881.4L44.5,882.6L42.1,882.9L39.3,881.5L40,877.8L45.9,871.7L47.0,867.2L45.9,863.1L46.0,859.9L44.4,857.7L41.8,856.5L40.7,854.0L41.4,847.5L44.4,841.0L48.3,839.2L50.7,838.4L51.4,837.2L50.7,832.4L51.2,829.4L54.0,823.7L56.6,819.5L60.9,820.7L62.8,819.8L64.9,818.5L67.5,816.0L69.3,813.0L71.9,805.9L73.2,804.9L78.4,806.7L80.0,805.9L83.3,801.9L86.6,796.9L90.7,795.7L93.5,795.8L95.0,794.2L95.1,791.6L92.9,787.3L91.9,784.0L92.4,782.0L96.5,781.2L97.6,778.9L97.5,773.7L99.7,767.7L101.3,760.4L102.1,755.0L102.5,750.9L102.4,746.5L102.5,738.6L101.5,731.6L102.1,728.9L102.5,720.5L102.1,713.4L100.2,711.9L96.5,709.2L94.3,708.6L92.4,709.2L91.5,711.6L89.6,713.8L87.4,713.1L86.7,710.6L85.5,707.4L82.5,692.6L82.3,688.4L82.0,684.1L80.7,681.9L79.2,680.6L75.9,675.4L74.2,673.1L73.4,672.7L71.3,672.8L69.3,672.6L68.0,670.1L66.9,667.0L65.6,665.4L63.2,664.4L60.6,664.4L58.9,666.8L57.7,668.1L55.6,671.3L52.0,675.8L50.3,677.3M766.6,960.6L764.8,960.1L763.0,959.7L760.2,959.9L759.1,960.6L757.1,961.1L755.7,962.5L755.6,962.7M734.7,976.4L733.3,976.6L732.9,977.8L732.8,978.8"/>
+        <g id="regAll"></g><g id="rAll"></g><g id="xAll"></g><g id="sAll"></g>
+      </svg>
+      <svg class="map" id="mapYun" viewBox="0 0 360 420" role="group" aria-label="Zoom sullo Yunnan nord-occidentale" hidden>
+        <rect class="zoombg" width="360" height="420"/>
+        <g id="rYun"></g><g id="xYun"></g><g id="sYun"></g>
+      </svg>
+      <div class="legend" aria-hidden="true">
+        <span><i></i>Treno</span><span><i class="b"></i>Bus o navetta</span><span><i class="f"></i>Volo</span>
+      </div>
+      <div class="panel" id="panel" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="tappe">
+    <h2>Giorno per giorno</h2>
+    <p class="sub">Marzo 2027. Le giornate segnate in rosso sono quelle passate quasi tutte in treno.</p>
+    <div id="days"></div>
+  </section>
+
+  <section id="tratte">
+    <h2>Le tratte</h2>
+    <p class="sub">Prezzi di seconda classe, indicativi. I biglietti si comprano con il passaporto su 12306, l’app delle ferrovie, o su Trip.com; la vendita apre 15 giorni prima della partenza.</p>
+    <div class="tsum" id="tsum"></div>
+    <div class="tickets" id="tickets"></div>
+  </section>
+
+  <section id="costi">
+    <h2>Quanto costa</h2>
+    <p class="sub">Stime in euro per una persona, con 1 € ≈ 7,8 ¥. Scegli come vuoi dormire e mangiare.</p>
+    <div class="toggle" role="group" aria-label="Stile di viaggio">
+      <button type="button" data-mode="s" aria-pressed="true">Spartano</button>
+      <button type="button" data-mode="c" aria-pressed="false">Comodo</button>
+    </div>
+    <div class="costs">
+      <div id="crows"></div>
+      <div class="total"><span>Totale</span><span class="big" id="ctot"></span></div>
+      <p class="perday" id="cday"></p>
+    </div>
+  </section>
+
+  <section id="documenti">
+    <h2>Documenti indispensabili</h2>
+    <p class="prog" id="prog"></p>
+    <ul class="checks" id="checks"></ul>
+  </section>
+
+  <section id="app">
+    <h2>App sul telefono</h2>
+    <p class="sub">Da installare e configurare in Italia: dalla Cina molte non si scaricano e le verifiche via SMS diventano più lente. Spunta quando l’hai provata.</p>
+    <p class="prog" id="aprog"></p>
+    <div id="apps"></div>
+    <p class="callout" style="margin-top:1.2rem">Prova finale prima di partire: un pagamento piccolo su Alipay, una traduzione in modalità aereo e un percorso su Amap. Se funzionano tutte e tre, sei a posto.</p>
+  </section>
+
+  <section class="notes" id="note">
+    <h2>Prima di prenotare</h2>
+    <h3>L’ordine giusto</h3>
+    <p>Prima chiarisci l’ingresso (esenzione o visto), poi compra i voli, poi gli alloggi con cancellazione gratuita. I treni si comprano per ultimi, 15 giorni prima: Datong → Pingyao ha solo due corse veloci al giorno e va presa appena apre la vendita. Trip.com accetta prenotazioni anticipate e prova a emettere il biglietto all’apertura.</p>
+    <h3>Freddo e caldo nello stesso zaino</h3>
+    <p>A Datong e sulla Muraglia di notte si va sotto zero, nello Yunnan il sole d’alta quota picchia ma la sera serve il pile, a Shenzhen sono già 20 gradi. Vestiti a strati e porta un piumino leggero comprimibile.</p>
+    <h3>Stazioni, metro e zaino</h3>
+    <p>Lo zaino passa ai raggi X in ogni stazione e in molte metro: coltellini e bombolette per il fornello vengono spesso sequestrati. Arriva in stazione con 45 minuti di margine, il passaporto fa da biglietto ai tornelli.</p>
+    <h3>Dove dormire</h3>
+    <p>Non tutte le strutture sono autorizzate a registrare stranieri. Prenota da Trip.com o Booking e controlla nelle recensioni che accettino passaporti esteri. Nella prima settimana di marzo a Pechino si riunisce il parlamento: più controlli in centro.</p>
+  </section>
+
+  <footer>Prezzi, orari e regole d’ingresso raccolti a inizio novembre 2026 da fonti pubbliche. Orari ferroviari e tariffe cambiano a ogni nuovo orario: ricontrolla tutto prima di comprare.</footer>
+</main>
+
+<script>
+(function(){
+const P = {"pechino": [791.7, 128.4], "datong": [680.4, 127.3], "pingyao": [646.1, 267.1], "xian": [527.2, 407.4], "chongqing": [432, 636.1], "kunming": [269.3, 853.4], "dali": [160.6, 812.8], "shaxi": [147.2, 777], "lijiang": [165.2, 752.2], "gola": [159.7, 736.6], "zhaoxing": [540.7, 810], "guangzhou": [721, 935.6], "shenzhen": [757.5, 961.3], "hongkong": [763, 972.2], "l_mongolia": [543.3, 40.1], "l_vietnam": [370.9, 1021.1], "l_laos": [231.7, 1038.6], "l_myanmar": [46.7, 911.2], "l_shanxi": [600.2, 196.7], "l_yunnan": [213.7, 896.5], "l_guizhou": [449.1, 763.1], "l_sichuan": [289.8, 586.7], "l_guangdong": [681.2, 887], "l_mare": [908.1, 899.7]};
+const Y = {"dali": [183, 351], "shaxi": [134, 218], "jianchuan": [145, 179], "lijiang": [201, 125], "gola": [180, 67], "kunming": [589, 502]};
+
+const STOPS = {
+  pechino:{name:"Pechino",zh:"北京",days:"Giorni 1–2",d0:1,temp:"−2 / 12 °C",text:"Hutong a piedi e un tratto di Muraglia lontano dai pullman."},
+  datong:{name:"Datong",zh:"大同",days:"Giorni 3–4",d0:3,temp:"−8 / 8 °C",text:"Le Grotte di Yungang e il Tempio Sospeso: lo Shanxi che pochi stranieri vedono."},
+  pingyao:{name:"Pingyao",zh:"平遥",days:"Giorni 5–6",d0:5,temp:"−3 / 12 °C",text:"Città murata rimasta intera, notte in una casa a corte, bici tra i templi."},
+  xian:{name:"Xi’an",zh:"西安",days:"Giorno 7, solo cambio treno",d0:7,temp:"",text:"Qui cambi treno. Se preferisci spezzare il viaggio, una notte per il quartiere musulmano.",transit:true},
+  chongqing:{name:"Chongqing",zh:"重庆",days:"Giorni 7–9",d0:7,temp:"9 / 16 °C",text:"Metropoli verticale sullo Yangtze, archeologia industriale e hotpot vero."},
+  kunming:{name:"Kunming",zh:"昆明",days:"Giorni 10 e 15, solo cambio treno",d0:10,temp:"",text:"Lo snodo ferroviario dello Yunnan: ci passi due volte.",transit:true},
+  dali:{name:"Dali",zh:"大理",days:"Giorno 10, una notte",d0:10,temp:"5 / 19 °C",text:"Notte di passaggio in riva al lago Erhai."},
+  jianchuan:{name:"Jianchuan",zh:"剑川",days:"Giorni 11 e 13, stazione",d0:11,temp:"",text:"La stazione più vicina a Shaxi: da qui minibus o Didi, circa 40 minuti.",transit:true},
+  shaxi:{name:"Shaxi",zh:"沙溪",days:"Giorni 11–12",d0:11,temp:"2 / 19 °C",text:"Villaggio della Via del tè e dei cavalli, con il mercato del venerdì."},
+  lijiang:{name:"Lijiang",zh:"丽江",days:"Giorni 13–14, base",d0:13,temp:"2 / 17 °C",text:"Stazione e notte d’appoggio per la gola. Dormi a Shuhe, non nella città vecchia."},
+  gola:{name:"Gola del Salto della Tigre",zh:"虎跳峡",days:"Giorni 13–14",d0:13,temp:"4 / 16 °C",text:"Due giorni sul sentiero alto, con notte in guesthouse sul crinale."},
+  zhaoxing:{name:"Zhaoxing",zh:"肇兴",days:"Giorni 15–16",d0:15,temp:"8 / 16 °C",text:"Villaggi Dong con torri del tamburo in legno e risaie a terrazza."},
+  shenzhen:{name:"Shenzhen",zh:"深圳",days:"Giorni 17–18",d0:17,temp:"16 / 22 °C",text:"Huaqiangbei, la capitale dell’hardware: per chi costruisce cose vale il viaggio da solo."},
+  hongkong:{name:"Hong Kong",zh:"香港",days:"Giorni 19–20",d0:19,temp:"16 / 21 °C",text:"Sham Shui Po, un’escursione al tramonto e il volo di ritorno."}
+};
+
+const DAYS = [
+ {n:1,wd:"lun",g:"pechino",t:"Atterraggio e hutong",mv:["fly","Volo da Milano"],x:"Dall’aeroporto in metro fino al centro. Pomeriggio a piedi tra gli hutong attorno a Gulou e Wudaoying, cena di jiaozi in una trattoria di quartiere. Se ci tieni alla Città Proibita, si prenota online con il passaporto."},
+ {n:2,wd:"mar",g:"pechino",t:"La Muraglia senza pullman",mv:["bus","Bus o Didi, circa 2,5 h per tratta"],x:"Fino a Jinshanling e 4–5 ore di cammino verso i tratti meno restaurati: a marzo non c’è quasi nessuno, vento freddo e panorami enormi. I tratti più selvaggi a volte vengono chiusi, quindi controlla la sera prima."},
+ {n:3,wd:"mer",g:"datong",t:"Grotte di Yungang",mv:["train","Treno, circa 2 h"],x:"Treno veloce da Pechino Nord o Qinghe. Nel pomeriggio Yungang: decine di migliaia di statue buddhiste scolpite nell’arenaria nel V secolo. Sera sulle mura di Datong."},
+ {n:4,wd:"gio",g:"datong",t:"Il Tempio Sospeso",mv:["bus","Didi o minibus, circa 1,5 h per tratta"],x:"Il tempio aggrappato alla parete di roccia da circa 1.500 anni. Se avanzano tempo ed energie, la pagoda di legno di Yingxian, la più antica della Cina."},
+ {n:5,wd:"ven",g:"pingyao",t:"Dentro le mura",mv:["train","Treno, circa 3 h"],x:"Una città murata Ming rimasta intera. Dormi in una casa a corte con il kang, il letto in muratura riscaldato. Il biglietto unico dei siti vale 3 giorni."},
+ {n:6,wd:"sab",g:"pingyao",t:"Pingyao in bici",x:"Bici a noleggio fino al Tempio Shuanglin, circa 7 km: duemila statue in terracotta dipinta e quasi nessuno in giro. Rientro sulle mura al tramonto."},
+ {n:7,wd:"dom",g:"chongqing",t:"Giornata di treno",mv:["train","Treno, circa 9 h con cambio a Xi’an"],long:true,x:"Pingyao → Xi’an Nord, cambio, Xi’an Nord → Chongqing. Porta da mangiare: in ogni carrozza c’è acqua calda gratis per i noodle istantanei, il pranzo nazionale. In alternativa dormi a Xi’an e fai il quartiere musulmano la sera."},
+ {n:8,wd:"lun",g:"chongqing",t:"La città verticale",x:"La monorotaia che attraversa un palazzo a Liziba, le scale di Shibati, la funivia sullo Yangtze. Di sera guarda Hongyadong illuminato dalla riva opposta: dentro è una calca."},
+ {n:9,wd:"mar",g:"chongqing",t:"Acciaierie e hotpot",x:"Il Museo industriale di Chongqing, ricavato nelle vecchie acciaierie: altoforni, laminatoi e la storia dell’industria pesante cinese. La sera hotpot piccante in un locale di quartiere, lontano dal lungofiume."},
+ {n:10,wd:"mer",g:"dali",t:"Giornata di treno",mv:["train","Treno, circa 7 h con cambio a Kunming"],long:true,x:"Chongqing → Kunming, cambio, Kunming → Dali. Arrivi la sera: dormi in riva al lago Erhai invece che nella città vecchia."},
+ {n:11,wd:"gio",g:"shaxi",t:"Verso Shaxi",mv:["train","Treno 1 h e minibus 40 min"],x:"Treno fino a Jianchuan, poi minibus o Didi. Shaxi era una stazione della Via del tè e dei cavalli: piazza lastricata, teatro in legno, pochissimi turisti."},
+ {n:12,wd:"ven",g:"shaxi",t:"Il mercato del venerdì",x:"Il venerdì dai villaggi Bai e Yi scendono per il mercato settimanale: per questo sei qui proprio oggi. Nel pomeriggio cammina fino alle grotte di Shibaoshan."},
+ {n:13,wd:"sab",g:"gola",t:"Inizia il trekking",mv:["bus","Treno 40 min e bus 2 h"],x:"Parti presto: treno Jianchuan → Lijiang e bus per Qiaotou. Lo zaino grande lo lasci in deposito a Qiaotou. Primo tratto del sentiero alto e notte in una guesthouse sul crinale."},
+ {n:14,wd:"dom",g:"gola",t:"Il sentiero alto",mv:["bus","Bus, circa 2 h"],x:"Le 28 curve, poi il sentiero a mezza costa con il fiume Jinsha centinaia di metri più in basso. Discesa a Tina’s, navetta per Qiaotou a riprendere lo zaino, bus per Lijiang. Notte a Shuhe, più tranquilla della città vecchia."},
+ {n:15,wd:"lun",g:"zhaoxing",t:"Giornata di treno",mv:["train","Treno, circa 8 h con cambio a Kunming"],long:true,x:"Lijiang → Kunming, poi treno veloce per Congjiang e navetta per Zhaoxing. È la tratta più lunga del viaggio: arrivi col buio."},
+ {n:16,wd:"mar",g:"zhaoxing",t:"Villaggi Dong",x:"Le cinque torri del tamburo di Zhaoxing, in legno a incastro. A piedi su per le risaie fino a Tang’an, più piccolo e più vero. A colazione prova l’youcha, il tè salato cotto con riso soffiato e arachidi."},
+ {n:17,wd:"mer",g:"shenzhen",t:"Verso Shenzhen",mv:["train","Treno, circa 4 h"],x:"Treno veloce via Guangzhou. Nel pomeriggio un primo giro a Huaqiangbei per orientarti tra i palazzi."},
+ {n:18,wd:"gio",g:"shenzhen",t:"Huaqiangbei",x:"Uno dei più grandi mercati di elettronica al mondo: palazzi interi di componenti, moduli, motori, schede e stampanti 3D. Contratta, prendi biglietti da visita, fotografa i banchi: molti fornitori vendono anche online. Sera nel vecchio borgo di Nantou."},
+ {n:19,wd:"ven",g:"hongkong",t:"Hong Kong",mv:["train","Treno, 15 min"],x:"Futian → West Kowloon, con la frontiera dentro la stazione. Pomeriggio a Sham Shui Po tra banchi di componenti e dim sum economici, tramonto a piedi su Lion Rock."},
+ {n:20,wd:"sab",g:"hongkong",t:"Rientro",mv:["fly","Volo per Milano"],x:"Airport Express dalla stazione di Hong Kong, 24 minuti. Arrivo a Milano in serata o il giorno dopo, a seconda dello scalo."}
+];
+const GROUPS = [["pechino","Pechino"],["datong","Datong"],["pingyao","Pingyao"],["chongqing","Chongqing"],["dali","Dali"],["shaxi","Shaxi"],["gola","Gola del Salto della Tigre e Lijiang"],["zhaoxing","Zhaoxing"],["shenzhen","Shenzhen"],["hongkong","Hong Kong"]];
+
+const LEGS = [
+ {d:3,f:["北京北","Pechino Nord o Qinghe"],to:["大同南","Datong Sud"],dur:"circa 2 h",pr:"¥160–170",lo:160,hi:170,h:2},
+ {d:5,f:["大同南","Datong Sud"],to:["平遥古城","Pingyao Gucheng"],dur:"circa 3 h",pr:"¥120–140",lo:120,hi:140,h:3,n:"Solo due treni veloci al giorno, entrambi al mattino: compralo appena apre la vendita."},
+ {d:7,f:["平遥古城","Pingyao Gucheng"],to:["西安北","Xi’an Nord"],dur:"circa 3 h",pr:"circa ¥150",lo:150,hi:150,h:3},
+ {d:7,f:["西安北","Xi’an Nord"],to:["重庆西","Chongqing Ovest"],dur:"5–6 h",pr:"¥280–460",lo:280,hi:460,h:5.5,n:"Lascia almeno un’ora per il cambio a Xi’an Nord."},
+ {d:10,f:["重庆西","Chongqing Ovest"],to:["昆明南","Kunming Sud"],dur:"circa 4 h 45",pr:"¥340–400",lo:340,hi:400,h:4.75},
+ {d:10,f:["昆明南","Kunming Sud"],to:["大理","Dali"],dur:"circa 2 h",pr:"circa ¥145",lo:145,hi:145,h:2},
+ {d:11,f:["大理","Dali"],to:["剑川","Jianchuan"],dur:"circa 1 h",pr:"circa ¥35",lo:35,hi:35,h:1,n:"Poi minibus o Didi per Shaxi, circa 40 minuti."},
+ {d:13,f:["剑川","Jianchuan"],to:["丽江","Lijiang"],dur:"circa 40 min",pr:"circa ¥25",lo:25,hi:25,h:.67},
+ {d:13,bus:true,f:["丽江","Lijiang, autostazione"],to:["桥头","Qiaotou"],dur:"circa 2 h",pr:"¥35–50",lo:35,hi:50,h:2,n:"La ferrovia per Shangri-La ha una stazione vicino alla gola, ma le fermate sono rare: guarda su 12306, altrimenti bus."},
+ {d:14,bus:true,f:["桥头","Qiaotou"],to:["丽江","Lijiang"],dur:"circa 2 h",pr:"¥35–50",lo:35,hi:50,h:2,n:"Minibus da Tina’s o da Qiaotou nel primo pomeriggio."},
+ {d:15,f:["丽江","Lijiang"],to:["昆明","Kunming"],dur:"circa 3 h 20",pr:"circa ¥200",lo:200,hi:200,h:3.33,n:"Controlla la stazione d’arrivo: se non è Kunming Sud, conta 45 minuti di metro per il cambio."},
+ {d:15,f:["昆明南","Kunming Sud"],to:["从江","Congjiang"],dur:"4–5 h",pr:"¥300–380",lo:300,hi:380,h:4.5,n:"Fuori dalla stazione c’è la navetta per Zhaoxing: 15 minuti, circa ¥10."},
+ {d:17,f:["从江","Congjiang"],to:["深圳北","Shenzhen Nord"],dur:"circa 4 h",pr:"¥230–260",lo:230,hi:260,h:4,n:"Passa da Guangzhou Sud: se non trovi diretti, cambia lì."},
+ {d:19,f:["福田","Shenzhen Futian"],to:["香港西九龙","Hong Kong West Kowloon"],dur:"15 min",pr:"¥70–90",lo:70,hi:90,h:.25,n:"Frontiera dentro la stazione: arriva 45 minuti prima."}
+];
+
+const COSTS = [
+ {l:"Voli",s:600,c:950,ds:"Milano → Pechino e Hong Kong → Milano, con uno scalo. Stima: le tariffe di marzo 2027 non sono ancora uscite.",dc:"Stesso giro, orari migliori o volo diretto per Pechino."},
+ {l:"Treni e bus",s:275,c:330,ds:"14 tratte in seconda classe, ≈ ¥2.150.",dc:"14 tratte in seconda classe alla tariffa più alta, ≈ ¥2.550."},
+ {l:"Trasporti locali",s:70,c:120,ds:"Metro, navette, minibus per Shaxi e la gola.",dc:"Più Didi, transfer privati per Muraglia e Tempio Sospeso."},
+ {l:"Dormire, 19 notti",s:240,c:560,ds:"Letto in camerata, ¥80–100 a notte. Hong Kong costa il doppio.",dc:"Camera privata in guesthouse, ¥200–300 a notte."},
+ {l:"Mangiare",s:220,c:400,ds:"Noodle, ravioli, street food: ¥80–100 al giorno.",dc:"Ristoranti seduti e qualche cena importante: ¥150–180 al giorno."},
+ {l:"Ingressi",s:90,c:110,ds:"Muraglia, Yungang, Tempio Sospeso, Pingyao, gola, Zhaoxing.",dc:"Gli stessi, più musei e qualche extra."},
+ {l:"Assicurazione",s:50,c:90,ds:"Spese mediche, rimpatrio, trekking.",dc:"Massimali alti e annullamento viaggio."},
+ {l:"eSIM dati",s:20,c:35,ds:"20 giorni di dati in roaming.",dc:"Più giga, per lavorare anche in viaggio."}
+];
+
+const DOCS = [
+ {id:"pass",t:"Passaporto valido almeno 6 mesi dall’ingresso",d:"Con almeno due pagine libere. Serve per ogni treno, ogni albergo e spesso anche per entrare nei musei."},
+ {id:"visa",t:"Esenzione dal visto o visto turistico L",d:"Per gli italiani l’ingresso senza visto fino a 30 giorni oggi scade il 31 dicembre 2026. La proroga per il 2027 non è ancora stata annunciata: finora è sempre arrivata a novembre. Se non arriva, chiedi il visto L al centro visti cinese di Milano o Roma con un mese abbondante di anticipo."},
+ {id:"out",t:"Volo di uscita e indirizzo della prima notte",d:"Alla frontiera possono chiederli, e l’indirizzo serve per la carta d’arrivo."},
+ {id:"ins",t:"Assicurazione sanitaria di viaggio",d:"Con spese mediche alte, rimpatrio e trekking incluso. La tessera sanitaria europea in Cina non vale."},
+ {id:"cards",t:"Due carte di pagamento e un po’ di contanti",d:"Una Visa e una Mastercard da collegare alle app di pagamento, più qualche centinaio di yuan per i villaggi. Avvisa la banca del viaggio."},
+ {id:"copy",t:"Copie del passaporto",d:"Una foto nel telefono e una copia cartacea tenuta separata dall’originale."},
+ {id:"hk",t:"Hong Kong: nessun visto",d:"Gli italiani entrano senza visto fino a 90 giorni. Il passaggio da Shenzhen è una frontiera vera, con controllo passaporti."}
+];
+
+const NS="http://www.w3.org/2000/svg";
+const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const q=(a,b,bend)=>{const dx=b[0]-a[0],dy=b[1]-a[1];const mx=(a[0]+b[0])/2-dy*bend,my=(a[1]+b[1])/2+dx*bend;return `M${a[0]} ${a[1]}Q${mx.toFixed(1)} ${my.toFixed(1)} ${b[0]} ${b[1]}`};
+
+/* ---------- maps ---------- */
+const qlen=(a,b,bend)=>{const dx=b[0]-a[0],dy=b[1]-a[1];const c=[(a[0]+b[0])/2-dy*bend,(a[1]+b[1])/2+dx*bend];let L=0,px=a[0],py=a[1];for(let i=1;i<=24;i++){const t=i/24,u=1-t;const x=u*u*a[0]+2*u*t*c[0]+t*t*b[0],y=u*u*a[1]+2*u*t*c[1]+t*t*b[1];L+=Math.hypot(x-px,y-py);px=x;py=y}return L};
+const svgAll=document.getElementById("mapAll"), svgYun=document.getElementById("mapYun");
+const views=[{svg:svgAll,W:1000,H:1060,labels:[],dots:[],dashes:[]},{svg:svgYun,W:360,H:420,labels:[],dots:[],dashes:[]}];
+
+const REG=[["l_shanxi","Shanxi","middle"],["l_sichuan","Sichuan","middle"],["l_guizhou","Guizhou","middle"],["l_guangdong","Guangdong","middle"],["l_vietnam","Vietnam","middle"],["l_laos","Laos","middle"],["l_myanmar","Myanmar","start"]];
+const regG=document.getElementById("regAll");
+P.l_guangdong=[700,880];
+REG.forEach(([k,txt,anc])=>{const t=el("text",{x:P[k][0],y:P[k][1],class:"region","text-anchor":anc},regG);t.textContent=txt});
+const sea=el("text",{x:610,y:1045,class:"region","text-anchor":"middle"},regG);sea.textContent="Mar Cinese Meridionale";
+
+function legs(view,gid,pts,list){
+  const g=document.getElementById(gid);let total=0;const paths=[];
+  list.forEach(([a,b,m,bend])=>{
+    const A=Array.isArray(a)?a:pts[a],B=Array.isArray(b)?b:pts[b];
+    const p=el("path",{d:q(A,B,bend),class:"leg "+m},g);
+    const len=qlen(A,B,bend);
+    if(m==="t"){p.setAttribute("pathLength","1");paths.push([p,len,total]);}
+    else{view.dashes.push([p,m]);paths.push([p,len,total,true]);}
+    total+=len;
+  });
+  return {paths,total};
+}
+function animate(res,dur){
+  const {paths,total}=res;
+  paths.forEach(([p,len,start,dashed])=>{
+    const delay=(start/total)*dur, d=Math.max(.08,(len/total)*dur);
+    if(dashed){p.style.opacity=0;p.style.transition=`opacity .3s ${delay}s`;requestAnimationFrame(()=>requestAnimationFrame(()=>p.style.opacity=1));}
+    else{p.classList.add("draw");p.style.animationDelay=delay+"s";p.style.animationDuration=d+"s";}
+  });
+}
+const allRes=legs(views[0],"rAll",P,[
+ ["pechino","datong","t",.14],["datong","pingyao","t",-.1],["pingyao","xian","t",.08],["xian","chongqing","t",-.06],["chongqing","kunming","t",.08],["kunming","dali","t",-.12],["dali","shaxi","t",.12],["shaxi","lijiang","t",.12],["lijiang","gola","b",.25],["gola","lijiang","b",.25],["lijiang","kunming","t",.14],["kunming","zhaoxing","t",-.1],["zhaoxing","shenzhen","t",.1],["shenzhen","hongkong","t",0]
+]);
+// flights
+const xg=document.getElementById("xAll");
+const f1=el("path",{d:q([735,0],P.pechino,-.15),class:"leg f"},xg);views[0].dashes.push([f1,"f"]);
+const f2=el("path",{d:q(P.hongkong,[1000,975],.12),class:"leg f"},xg);views[0].dashes.push([f2,"f"]);
+const fl1=el("text",{class:"note","text-anchor":"end"},xg);fl1.textContent="volo da Milano";
+const fl2=el("text",{class:"note","text-anchor":"end"},xg);fl2.textContent="volo per Milano";
+views[0].labels.push([fl1,[728,0],-6,16]);views[0].labels.push([fl2,[996,975],0,-16]);
+// Yunnan box
+const box=el("g",{class:"stop",role:"button",tabindex:"0","aria-label":"Apri lo zoom sullo Yunnan"},xg);
+el("rect",{x:118,y:708,width:80,height:136,rx:6,class:"ylbox"},box);
+const bl=el("text",{class:"lab","text-anchor":"middle"},box);bl.textContent="Yunnan nord";
+views[0].labels.push([bl,[158,708],0,-8]);
+box.addEventListener("click",()=>setView(1));
+box.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setView(1)}});
+
+const yRes=legs(views[1],"rYun",Y,[
+ [[352,414],"dali","t",0],["dali","jianchuan","t",.1],["jianchuan","shaxi","b",.35],["shaxi","jianchuan","b",.35],["jianchuan","lijiang","t",-.1],["lijiang","gola","b",.25],["gola","lijiang","b",.25],["lijiang",[352,268],"t",0]
+]);
+const yx=document.getElementById("xYun");
+const k1=el("text",{class:"lab m","text-anchor":"end"},yx);k1.textContent="verso Kunming";views[1].labels.push([k1,[352,414],-6,-10]);
+const k2=el("text",{class:"lab m","text-anchor":"end"},yx);k2.textContent="verso Kunming";views[1].labels.push([k2,[352,268],-6,-10]);
+const sc=el("g",{},yx);el("line",{x1:16,y1:404,x2:16+32,y2:404,class:"scale"},sc);
+const sct=el("text",{class:"lab m"},sc);sct.textContent="20 km";views[1].labels.push([sct,[16,404],0,-8]);
+
+const STOPS_ALL={pechino:[14,5,"start"],datong:[0,-14,"middle"],pingyao:[13,5,"start"],xian:[12,5,"start"],chongqing:[-13,5,"end"],kunming:[10,17,"start"],zhaoxing:[13,5,"start"],shenzhen:[-12,-3,"end"],hongkong:[10,17,"start"]};
+const CLUSTER=["dali","shaxi","lijiang","gola"];
+const STOPS_Y={dali:[13,5,"start","notte sul lago Erhai"],jianchuan:[-12,5,"end","stazione"],shaxi:[-13,5,"end","mercato del venerdì"],lijiang:[13,5,"start","base, notte a Shuhe"],gola:[-13,-1,"end","2 giorni di trekking"]};
+const LABEL_SHORT={gola:"Gola della Tigre"};
+
+const stopEls={};
+function addStops(vi,gid,pts,conf){
+  const v=views[vi],g=document.getElementById(gid);
+  for(const id in conf){
+    const s=STOPS[id],[dx,dy,anc,sub]=conf[id];
+    const grp=el("g",{class:"stop"+(s.transit?" transit":""),role:"button",tabindex:"0","aria-label":s.name},g);
+    const hit=el("circle",{cx:pts[id][0],cy:pts[id][1],class:"hit"},grp);
+    const dot=el("circle",{cx:pts[id][0],cy:pts[id][1],class:"dot"},grp);
+    const t=el("text",{class:"lab"+(s.transit?" m":""),"text-anchor":anc},grp);t.textContent=LABEL_SHORT[id]||s.name;
+    v.labels.push([t,pts[id],dx,dy]);v.dots.push([dot,s.transit?4:6.5],[hit,20]);
+    if(sub){const t2=el("text",{class:"lab m","text-anchor":anc},grp);t2.textContent=sub;v.labels.push([t2,pts[id],dx,dy+15]);}
+    grp.addEventListener("click",()=>select(id));
+    grp.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(id)}});
+    (stopEls[id]=stopEls[id]||[]).push(grp);
+  }
+}
+addStops(0,"sAll",P,STOPS_ALL);
+const cg=document.getElementById("sAll");
+CLUSTER.forEach(id=>{const d=el("circle",{cx:P[id][0],cy:P[id][1],class:"cdot"},cg);d.style.pointerEvents="none";views[0].dots.push([d,3.5]);});
+addStops(1,"sYun",Y,STOPS_Y);
+
+function layout(v){
+  if(v.svg.hasAttribute("hidden"))return;
+  const rc=v.svg.getBoundingClientRect();if(!rc.width||!rc.height)return;
+  const k=Math.max(v.W/rc.width,v.H/rc.height);v.svg.style.setProperty("--k",k);
+  v.labels.forEach(([t,p,dx,dy])=>{t.setAttribute("x",p[0]+dx*k);t.setAttribute("y",p[1]+dy*k)});
+  v.dots.forEach(([c,r])=>c.setAttribute("r",r*k));
+  v.dashes.forEach(([p,m])=>p.setAttribute("stroke-dasharray",m==="f"?`${1.5*k} ${4.5*k}`:`${6*k} ${4.5*k}`));
+}
+const ro=new ResizeObserver(()=>views.forEach(layout));views.forEach(v=>ro.observe(v.svg));
+
+let yAnimated=false;
+function setView(i){
+  svgAll.toggleAttribute("hidden",i!==0);svgYun.toggleAttribute("hidden",i!==1);
+  document.getElementById("vAll").setAttribute("aria-pressed",i===0);
+  document.getElementById("vYun").setAttribute("aria-pressed",i===1);
+  layout(views[i]);
+  if(i===1&&!yAnimated){yAnimated=true;animate(yRes,1.2)}
+}
+document.getElementById("vAll").onclick=()=>setView(0);
+document.getElementById("vYun").onclick=()=>setView(1);
+
+const panel=document.getElementById("panel");
+function select(id){
+  const s=STOPS[id];
+  Object.values(stopEls).flat().forEach(g=>g.classList.remove("sel"));
+  (stopEls[id]||[]).forEach(g=>g.classList.add("sel"));
+  panel.innerHTML="";
+  const h=document.createElement("div");h.className="pt";
+  const h3=document.createElement("h3");h3.textContent=s.name;const zh=document.createElement("span");zh.className="zh";zh.lang="zh";zh.textContent=s.zh;
+  h.append(h3,zh);
+  const m=document.createElement("div");m.className="meta";m.textContent=s.days+(s.temp?`. Marzo, minime e massime: ${s.temp}`:"");
+  const p=document.createElement("p");p.textContent=s.text;
+  const b=document.createElement("button");b.type="button";b.className="btn";b.textContent=`Vai al giorno ${s.d0}`;
+  b.onclick=()=>{const d=document.getElementById("g"+s.d0);d.scrollIntoView({block:"start"});d.classList.remove("flash");void d.offsetWidth;d.classList.add("flash")};
+  panel.append(h,m,p,b);
+}
+
+/* ---------- days ---------- */
+const ICON={
+ train:'<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="1.5" width="10" height="10.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 7h10M5.5 12l-2 3M10.5 12l2 3" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="5.8" cy="9.4" r=".9" fill="currentColor"/><circle cx="10.2" cy="9.4" r=".9" fill="currentColor"/></svg>',
+ bus:'<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2" width="12" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M2 7.5h12" stroke="currentColor" stroke-width="1.5"/><circle cx="5" cy="13.5" r="1.3" fill="currentColor"/><circle cx="11" cy="13.5" r="1.3" fill="currentColor"/></svg>',
+ fly:'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 9.5l13-5.2-2.6 9.2-3.4-3.3-2.2 2.6-.4-3.4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>'
+};
+const daysEl=document.getElementById("days");
+GROUPS.forEach(([gid,title])=>{
+  const s=STOPS[gid];const wrap=document.createElement("div");wrap.className="group";
+  const head=document.createElement("div");head.className="ghead";
+  const h3=document.createElement("h3");h3.textContent=title;const zh=document.createElement("span");zh.className="zh";zh.lang="zh";zh.textContent=s.zh;
+  const tp=document.createElement("span");tp.className="temp";tp.textContent=s.temp;
+  head.append(h3,zh,tp);wrap.append(head);
+  DAYS.filter(d=>d.g===gid).forEach(d=>{
+    const row=document.createElement("div");row.className="day"+(d.long?" long":"");row.id="g"+d.n;
+    const dn=document.createElement("div");dn.className="dn";dn.innerHTML=`${d.n}<small>${d.wd} ${d.n} mar</small>`;
+    const body=document.createElement("div");
+    if(d.mv){const mv=document.createElement("div");mv.className="move "+(d.mv[0]==="train"?"":d.mv[0]);mv.innerHTML=ICON[d.mv[0]];mv.append(d.mv[1]);body.append(mv)}
+    const h4=document.createElement("h4");h4.textContent=d.t;const p=document.createElement("p");p.textContent=d.x;
+    body.append(h4,p);row.append(dn,body);wrap.append(row);
+  });
+  daysEl.append(wrap);
+});
+
+/* ---------- tickets ---------- */
+const tk=document.getElementById("tickets");
+const WD=Object.fromEntries(DAYS.map(d=>[d.n,d.wd]));
+let lo=0,hi=0,hours=0;
+LEGS.forEach((l,i)=>{
+  lo+=l.lo;hi+=l.hi;hours+=l.h;
+  const t=document.createElement("article");t.className="ticket"+(l.bus?" bus":"");
+  const num=String(i+1).padStart(2,"0");
+  t.innerHTML=`<div class="trow"><span class="serial">${l.bus?"B":"T"}${num}</span><span>Giorno ${l.d}, ${WD[l.d]} ${l.d} marzo</span></div>
+  <div class="route"><div class="st"><b lang="zh"></b><span></span></div>
+  <svg class="arrow" viewBox="0 0 42 12" aria-label="verso"><line x1="1" y1="6" x2="39" y2="6"/><path d="M34 1.5l5 4.5-5 4.5"/></svg>
+  <div class="st to"><b lang="zh"></b><span></span></div></div>
+  <div class="tfoot"><span></span><span></span><span>${l.bus?"Bus":"2ª classe"}</span></div>`;
+  const st=t.querySelectorAll(".st");
+  st[0].querySelector("b").textContent=l.f[0];st[0].querySelector("span").textContent=l.f[1];
+  st[1].querySelector("b").textContent=l.to[0];st[1].querySelector("span").textContent=l.to[1];
+  const ft=t.querySelectorAll(".tfoot span");ft[0].textContent=l.dur;ft[1].textContent=l.pr;
+  if(l.n){const n=document.createElement("p");n.className="tnote";n.textContent=l.n;t.append(n)}
+  tk.append(t);
+});
+const fmt=n=>n.toLocaleString("it-IT");
+const ts=document.getElementById("tsum");
+ts.innerHTML=`<span><b>${LEGS.length}</b> tratte</span><span><b>circa ${Math.round(hours)} ore</b> di viaggio</span><span><b>¥${fmt(Math.round(lo/50)*50)}–${fmt(Math.round(hi/50)*50)}</b> in tutto</span>`;
+
+/* ---------- costs ---------- */
+const crows=document.getElementById("crows");
+function renderCosts(mode){
+  const k=mode==="c"?"c":"s";const tot=COSTS.reduce((a,c)=>a+c[k],0);
+  crows.innerHTML="";
+  COSTS.forEach(c=>{
+    const r=document.createElement("div");r.className="crow";
+    r.innerHTML=`<div class="top"><span class="lbl"></span><span class="val">${fmt(c[k])} €</span></div><div class="det"></div><div class="bar-c"><i style="width:${(c[k]/tot*100).toFixed(1)}%"></i></div>`;
+    r.querySelector(".lbl").textContent=c.l;r.querySelector(".det").textContent=k==="c"?c.dc:c.ds;crows.append(r);
+  });
+  document.getElementById("ctot").textContent=`≈ ${fmt(Math.round(tot/50)*50)} €`;
+  const inChina=COSTS.filter(c=>c.l!=="Voli"&&c.l!=="Assicurazione").reduce((a,c)=>a+c[k],0);
+  document.getElementById("cday").textContent=`In Cina spendi circa ${Math.round(inChina/20)} € al giorno, tutto compreso tranne voli e assicurazione.`;
+  document.querySelectorAll(".toggle button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mode===mode));
+}
+document.querySelectorAll(".toggle button").forEach(b=>b.onclick=()=>renderCosts(b.dataset.mode));
+renderCosts("s");
+
+/* ---------- documents ---------- */
+const KEY="cina-treno-docs";let saved={};
+try{saved=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){saved={}}
+const checks=document.getElementById("checks"),prog=document.getElementById("prog");
+function updProg(){const n=DOCS.filter(d=>saved[d.id]).length;prog.innerHTML=`<b>${n} di ${DOCS.length}</b> pronti. Le spunte restano salvate su questo dispositivo.`}
+DOCS.forEach(d=>{
+  const li=document.createElement("li");const lab=document.createElement("label");
+  const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!saved[d.id];
+  const sp=document.createElement("span");sp.innerHTML='<span class="ct"></span><span class="cd"></span>';
+  sp.querySelector(".ct").textContent=d.t;sp.querySelector(".cd").textContent=d.d;
+  cb.onchange=()=>{saved[d.id]=cb.checked;try{localStorage.setItem(KEY,JSON.stringify(saved))}catch(e){}updProg()};
+  lab.append(cb,sp);li.append(lab);checks.append(li);
+});
+updProg();
+
+/* ---------- apps ---------- */
+const APPS=[
+ ["Internet",[
+  {id:"esim",t:"eSIM dati con roaming (Airalo, Holafly, Nomad…)",d:"Il traffico passa da fuori Cina: Google, WhatsApp e Instagram funzionano senza fare nulla. Installala a casa e attivala all’atterraggio."},
+  {id:"sim",t:"SIM italiana solo per gli SMS",d:"Tienila attiva come seconda linea con il roaming dati spento: serve per i codici di verifica di Alipay, WeChat e DiDi."},
+  {id:"vpn",t:"VPN di riserva",d:"Per il Wi-Fi di ostelli e hotel. Dalla Cina non si scarica: installala e provala prima. Quelle non autorizzate sono formalmente vietate, anche se con i turisti nessuno controlla."}
+ ]],
+ ["Comunicare con l’Italia",[
+  {id:"wa",t:"WhatsApp",d:"Con l’eSIM funziona come a casa."},
+  {id:"ft",t:"FaceTime e iMessage",d:"Già sull’iPhone, di solito funzionano anche in Cina."},
+  {id:"wc",t:"WeChat",d:"Per ostelli, autisti e persone conosciute lì. Registrati prima: a volte chiede la conferma di un utente già iscritto."}
+ ]],
+ ["Tradurre",[
+  {id:"tr",t:"Traduci di Apple",d:"Scarica il cinese per l’uso offline. Con la fotocamera traduce menu e cartelli."},
+  {id:"gt",t:"Google Traduttore",d:"Con il pacchetto cinese offline, come riserva."},
+  {id:"pl",t:"Pleco",d:"Il dizionario migliore: riconosce anche i caratteri scritti a mano."}
+ ]],
+ ["Pagare",[
+  {id:"ali",t:"Alipay",d:"Collega la carta e fai un pagamento di prova. Dentro trovi anche DiDi e il QR della metro di Pechino e Shanghai."},
+  {id:"wcp",t:"WeChat Pay",d:"Si attiva dentro WeChat. Collega la carta anche qui: alcuni posti accettano solo questo."}
+ ]],
+ ["Muoversi",[
+  {id:"amap",t:"Amap",d:"Mappe in inglese, precise fino a quale uscita della metro ha la scala mobile. Google Maps in Cina è sballato."},
+  {id:"didi",t:"DiDi",d:"Taxi con interfaccia in inglese, carte estere e traduzione automatica dei messaggi con l’autista."},
+  {id:"trip",t:"Trip.com e 12306",d:"Treni e alloggi. Trip.com è in inglese, 12306 è l’app ufficiale delle ferrovie."}
+ ]]
+];
+const AKEY="cina-treno-app";let asaved={};
+try{asaved=JSON.parse(localStorage.getItem(AKEY)||"{}")||{}}catch(e){asaved={}}
+const appsEl=document.getElementById("apps"),aprog=document.getElementById("aprog");
+const allApps=APPS.flatMap(g=>g[1]);
+function updA(){const n=allApps.filter(a=>asaved[a.id]).length;aprog.innerHTML=`<b>${n} di ${allApps.length}</b> installate e provate.`}
+APPS.forEach(([title,items])=>{
+  const g=document.createElement("div");g.className="agroup";
+  const h=document.createElement("h3");h.textContent=title;
+  const ul=document.createElement("ul");ul.className="checks";
+  items.forEach(a=>{
+    const li=document.createElement("li");const lab=document.createElement("label");
+    const cb=document.createElement("input");cb.type="checkbox";cb.checked=!!asaved[a.id];
+    const sp=document.createElement("span");sp.innerHTML='<span class="ct"></span><span class="cd"></span>';
+    sp.querySelector(".ct").textContent=a.t;sp.querySelector(".cd").textContent=a.d;
+    cb.onchange=()=>{asaved[a.id]=cb.checked;try{localStorage.setItem(AKEY,JSON.stringify(asaved))}catch(e){}updA()};
+    lab.append(cb,sp);li.append(lab);ul.append(li);
+  });
+  g.append(h,ul);appsEl.append(g);
+});
+updA();
+
+/* ---------- start ---------- */
+select("pechino");
+views.forEach(layout);
+requestAnimationFrame(()=>{layout(views[0]);animate(allRes,2.4)});
+})();
+</script>
+</body>
+</html>
